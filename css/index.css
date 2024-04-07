@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Slavia";
-    src: url("fonts/SlaviaHeadline-SemiBold-v2-unicode.ttf") format("truetype");
+    src: url("./fonts/SlaviaHeadline-SemiBold-v2-unicode.ttf") format("truetype");
 }
 @font-face{
     font-family: "Font Awesome 5 Free";
