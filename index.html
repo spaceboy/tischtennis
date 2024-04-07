@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Tischtennis</title>
+    <link href="favicon.png" rel="icon" type="image/png">
+    <link href="css/fa/styles/fontawesome.min.css" rel="stylesheet">
+    <link href="css/fa/styles/solid.min.css" rel="stylesheet">
+    <link href="css/fa/styles/brands.min.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+    <script src="js/toolkit/Evnt.js"></script>
+    <script src="js/toolkit/Elem.js"></script>
+    <script src="js/Tischtennis.js"></script>
+</head>
+<body>
+    <div id="main" data-serving="player1" data-enforced="none" data-finished="false">
+        <div id="scoreboard-game">
+            <div class="wrapper">
+                <div class="player player1">
+                    <div class="name">PLAYER 1</div>
+                    <div class="set">0</div>
+                </div>
+                <div class="player player2">
+                    <div class="set">0</div>
+                    <div class="name">PLAYER 2</div>
+                </div>
+            </div>
+        </div>
+        <div id="scoreboard-set">
+            <div id="player1" class="score-current">
+                <div class="score">0</div>
+            </div>
+            <div id="player2" class="score-current">
+                <div class="score">0</div>
+            </div>
+            <div class="serving"><i class="fas fa-table-tennis"></i></div>
+        </div>
+        <div id="scoreboard-match">
+            <div class="wrapper"></div>
+        </div>
+        <div id="commercial-sector">
+            SPACEBOY SPORT SERVICE
+        </div>
+
+        <div id="btn-undo" class="button" data-visible="false">
+            <i class="fas fa-undo-alt"></i>
+        </div>
+
+        <!--
+        <div id="btn-setup" class="button">
+            <i class="fas fa-cog"></i>
+        </div>
+        -->
+    </div>
+
+    <div id="setup" class="setup">
+        <h1 data-shadow="SETTINGS">NASTAVENÍ</h1>
+
+        <h2 class="player1 name">PLAYER 1</h2>
+
+        <h2 class="player2 name">PLAYER 2</h2>
+
+        <!--
+        <div id="btn-play" class="button">
+            <i class="fas fa-table-tennis"></i>
+        </div>
+        -->
+    </div>
+
+    <audio id="audio-applause" preload="auto">
+        <source src="sfx/applause.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="non-visual">
+        <h2 id="template-final-header">DOHRÁNO</h2>
+        <div id="template-final-row" class="row">
+            <div class="player1"></div>
+            <div class="separator" style="">-</div>
+            <div class="player2"></div>
+        </div>
+    </div>
+    <script src="js/index.js"></script>
+</body>
+</html>

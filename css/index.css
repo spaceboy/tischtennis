@@ -1,0 +1,297 @@
+@font-face {
+    font-family: "Slavia";
+    src: url("fonts/SlaviaHeadline-SemiBold-v2-unicode.ttf") format("truetype");
+}
+@font-face{
+    font-family: "Font Awesome 5 Free";
+    font-style: normal;
+    font-weight: 900;
+    font-display: block;
+    src:url("fa/webfonts/fa-solid-900.eot");
+    src:url("fa/webfonts/fa-solid-900.eot?#iefix") format("embedded-opentype"),
+    url("fa/webfonts/fa-solid-900.woff2") format("woff2"),
+    url("fa/webfonts/fa-solid-900.woff") format("woff"),
+    url("fa/webfonts/fa-solid-900.ttf") format("truetype"),
+    url("fa/webfonts/fa-solid-900.svg#fontawesome") format("svg");
+}
+
+html, body {
+    background: ghostwhite;
+    border: 0;
+    font-family: "Slavia", sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+#main {
+    background-color: green;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    flex-flow: column;
+}
+
+#main #scoreboard-set {
+    flex-grow: 3;
+    display: flex;
+    flex-flow: row;
+    height: 100%;
+}
+
+#main #scoreboard-set .score-current {
+    display: table;
+    flex-grow: 1;
+    vertical-align: middle;
+    text-align: center;
+    width: 50%;
+}
+
+#main #scoreboard-set .score-current .score {
+    color: ghostwhite;
+    font-size: 25vh;
+    font-weight: bold;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+#main #scoreboard-set .serving {
+    color: ghostwhite;
+    display: none;
+    font-size: 12vw;
+    font-weight: 900;
+    opacity: .2;
+    position: absolute;
+    top: 8vw;
+}
+
+#main[data-serving="player1"] #scoreboard-set .serving {
+    display: block;
+    left: 5vh;
+}
+
+#main[data-serving="player2"] #scoreboard-set .serving {
+    display: block;
+    right: 5vh;
+}
+
+#main #scoreboard-game {
+    flex-flow: row;
+    flex-grow: 1;
+}
+
+#main #scoreboard-game .wrapper {
+    display: flex;
+    background-color: ghostwhite;
+    border-right: 5px solid black;
+    border-bottom: 5px solid black;
+    border-left: 5px solid black;
+    border-radius: 0 0 1vw 1vw;
+    padding: 1vh;
+    margin: 0 5vw;
+}
+
+#main #scoreboard-game .wrapper .player {
+    display: flex;
+    flex-flow: row;
+    flex-grow: 1;
+    font-size: 4vw;
+    font-weight: bold;
+    width: 50%;
+}
+
+#main #scoreboard-game .wrapper .player div {
+    display: inline-block;
+}
+
+#main #scoreboard-game .wrapper .player .name {
+    flex-grow: 5;
+    margin: 0 2vw;
+    overflow: hidden;
+    text-transform: uppercase;
+    text-wrap: nowrap;
+}
+
+#main #scoreboard-game .wrapper .player .set {
+    flex-grow: 1;
+    text-align: center;
+}
+
+#main #scoreboard-game .wrapper .player1 .name {
+    text-align: left;
+}
+
+#main #scoreboard-game .wrapper .player2 .name {
+    text-align: right;
+}
+
+#main #scoreboard-match {
+    display: none;
+    position: fixed;
+    top: 10vw;
+    text-align: center;
+    width: 100%;
+    z-index: 100;
+}
+
+#main[data-finished="true"] #scoreboard-match {
+    display: block;
+}
+
+#main #scoreboard-match .wrapper {
+    background: ghostwhite;
+    border: 5px solid black;
+    border-radius: 1vw;
+    font-size: 4vw;
+    display: inline-block;
+    margin: auto;
+    padding: 1vh 5vw 2vh 5vw;
+}
+
+#main #scoreboard-match .wrapper h2 {
+    color: darkgreen;
+    margin: .25em 0;
+}
+
+#main #scoreboard-match .wrapper .row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: .5em;
+}
+
+#main #scoreboard-match .wrapper .row div {
+    flex: 1;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+#main #scoreboard-match .wrapper .row div.player1 {
+    flex-grow: 1;
+    flex-shrink: 1;
+    text-align: right;
+    padding-right: .25em;
+}
+
+#main #scoreboard-match .wrapper .row div.player2 {
+    flex-grow: 1;
+    flex-shrink: 1;
+    text-align: left;
+    padding-left: .25em;
+}
+
+#main #scoreboard-match .wrapper .row div.separator {
+    flex-grow: 0;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+#main .button {
+    color: black;
+    font-size: 8vw;
+    font-weight: 900;
+    opacity: .2;
+    position: absolute;
+}
+
+#main #btn-undo {
+    display: none;
+    bottom: 1vw;
+    right: 1vw;
+}
+
+#main #btn-undo[data-visible="true"] {
+    display: block;
+}
+
+#main #btn-setup {
+    display: block;
+    bottom: 1vw;
+    left: 1vw;
+}
+
+#main #commercial-sector {
+    position: absolute;
+    left: 1vh;
+    bottom: .5vw;
+    font-size: 3vw;
+    font-family: "Slavia", sans-serif;
+    color: ghostwhite;
+    opacity: .2;
+    z-index: -1;
+}
+
+
+
+#setup {
+    color: darkgreen;
+    min-height: 100%;
+    width: 100%;
+    padding: 1vw 2vh;
+    margin: 0;
+    border: none;
+
+}
+
+#setup h1 {
+    font-family: "Slavia", sans-serif;
+    font-size: 12vw;
+    margin: .25em 0 0 0;
+}
+
+#setup .button {
+    color: darkgreen;
+    font-size: 12vw;
+    font-weight: 900;
+    position: absolute;
+}
+
+#setup #btn-play {
+    display: block;
+    position: fixed;
+    top: .2em;
+    right: 1em;
+}
+
+
+
+*[data-shadow] {
+    position: relative;
+}
+
+*[data-shadow]::before {
+    content: attr(data-shadow);
+    position: absolute;
+    transform-origin: 0 100%;
+    transform: scale(1.6);
+    opacity: 0.1;
+    bottom: -25%;
+    left: -3%;
+}
+
+.non-visual {
+    display: none !important;
+}
+
+@media all and (orientation: landscape) {
+    #main {
+        display: flex !important;
+    }
+    #setup {
+        display: none !important;
+    }
+}
+
+@media all and (orientation: portrait) {
+    #main {
+        display: none !important;
+    }
+    #setup {
+        display: block !important;
+    }
+}
