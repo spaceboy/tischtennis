@@ -8,14 +8,14 @@ class Elem {
                 this.element = context;
                 return;
             }
-            var element = context.querySelector(el);
+            let element = context.querySelector(el);
             if (!element) {
                 return;
             }
             this.element = element;
             return;
         }
-        var element = (
+        let element = (
             el
             ? (context instanceof Elem ? context.get() : context).querySelector(el)
             : document.querySelector(context)
@@ -388,6 +388,87 @@ class Elem {
         return o[number];
     }
 
+    // Opens current element in fullscreen mode.
+    requestFullscreen () {
+        if (this.element.requestFullscreen) {
+            this.element.requestFullscreen();
+        } else if (this.element.webkitRequestFullscreen) {
+            this.element.webkitRequestFullscreen();
+        } else if (element.msRequestFullscreen) {
+            this.element.msRequestFullscreen();
+        } else if (element.mozRequestFullscreen) {
+            this.element.mozRequestFullscreen();
+        }
+    }
+
+    // Exiting fullscreen mode.
+    static exitFullscreen () {
+        if (!document.fullscreenElement) {
+            return;
+        }
+
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        } else if (document.mozExitFullscreen) {
+            document.mozExitFullscreen();
+        }
+    }
+
+    // Returns fullscreen element.
+    static getFullscreenElement () {
+        if (document.fullscreenElement) {
+            return document.fullscreenElement;
+        }
+        if (document.webkitFullscreenElement) {
+            return document.webkitFullscreenElement;
+        }
+        if (document.msFullscreenElement) {
+            return document.msFullscreenElement;
+        }
+        if (document.mozFullscreenElement) {
+            return document.mozFullscreenElement;
+        }
+    }
+
+    // Checks whether fullscreen mode is enabled.
+    static isFullscreenEnabled () {
+        if (document.fullscreenEnabled) {
+            return document.fullscreenEnabled;
+        }
+        if (document.webkitFullscreenEnabled) {
+            return document.webkitFullscreenEnabled;
+        }
+        if (document.msFullscreenEnabled) {
+            return document.msFullscreenEnabled;
+        }
+        if (document.mozFullscreenEnabled) {
+            return document.mozFullscreenEnabled;
+        }
+    }
+
+    // Checks whether fullscreen mode is active.
+    static isFullscreenActive () {
+        return !!Elem.getFullscreenElement();
+    }
+
+    // TOOL: Returs element, document or false.
+    static findElement (sel) {
+        if (sel instanceof Elem) {
+            return sel.get();
+        }
+        if (Elem.isDomObject(sel)) {
+            return sel;
+        }
+        if (!sel) {
+            return document;
+        }
+        return (document.querySelector(sel) ?? false);
+    }
+
     // TOOL: Detect whether given object is a DOM object.
     static isDomObject (obj) {
         if (obj instanceof HTMLElement) {
@@ -404,6 +485,8 @@ class Elem {
     // TRUE element removed
     // FALSE element not removed
     static removeElement (el) {
+        let e;
+
         if (Elem.isDomObject(el)) {
             if (el.parentNode) {
                 el.parentNode.removeChild(el);
@@ -411,13 +494,13 @@ class Elem {
             return true;
         }
         if (el instanceof Elem) {
-            var e = el.get();
+            e = el.get();
             if (e.parentNode) {
                 e.parentNode.removeChild(e);
             }
             return true;
         }
-        var e = document.querySelector(el);
+        e = document.querySelector(el);
         if (e.parentNode) {
             e.parentNode.removeChild(e);
             return true;
@@ -517,12 +600,13 @@ class Elem {
         if (typeof value !== "string") {
             return value;
         }
+        let attr;
         if (el.hasAttribute("data-prefix")) {
-            var attr = el.getAttribute("data-prefix");
+            attr = el.getAttribute("data-prefix");
             value = value.replace((new RegExp(`${attr}$`)), "")
         }
         if (el.hasAttribute("data-postfix")) {
-            var attr = el.getAttribute("data-postfix");
+            attr = el.getAttribute("data-postfix");
             value = value.replace((new RegExp(`^${attr}`)), "")
         }
         if (!el.hasAttribute("type")) {

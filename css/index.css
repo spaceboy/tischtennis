@@ -65,7 +65,7 @@ html, body {
     display: none;
     font-size: 12vw;
     font-weight: 900;
-    opacity: .2;
+    opacity: .6;
     position: absolute;
     top: 8vw;
 }
@@ -199,9 +199,26 @@ html, body {
     position: absolute;
 }
 
+#main #btn-fullscreen {
+    bottom: 1vh;
+    left: 1vw;
+}
+
+#main #btn-fullscreen i {
+    display: none;
+}
+
+#main #btn-fullscreen[data-fullscreen="true"] i.fa-compress {
+    display: block;
+}
+
+#main #btn-fullscreen[data-fullscreen="false"] i.fa-expand {
+    display: block;
+}
+
 #main #btn-undo {
     display: none;
-    bottom: 1vw;
+    bottom: 1vh;
     right: 1vw;
 }
 
@@ -209,20 +226,24 @@ html, body {
     display: block;
 }
 
+/*
 #main #btn-setup {
     display: block;
     bottom: 1vw;
     left: 1vw;
 }
+*/
 
 #main #commercial-sector {
     position: absolute;
-    left: 1vh;
+    left: 0;
     bottom: .5vw;
     font-size: 3vw;
     font-family: "Slavia", sans-serif;
     color: ghostwhite;
     opacity: .2;
+    text-align: center;
+    width: 100%;
     z-index: -1;
 }
 

@@ -2,16 +2,16 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Permissions-Policy" content="gyroscope=(self), screen-wake-lock=(self), interest-cohort=*">
+    <meta http-equiv="Permissions-Policy" content="fullscreen=(self), gyroscope=(self), screen-wake-lock=(self), interest-cohort=*">
     <title>Tischtennis</title>
     <link href="./favicon.png" rel="icon" type="image/png">
     <link href="./css/fa/styles/fontawesome.min.css" rel="stylesheet">
     <link href="./css/fa/styles/solid.min.css" rel="stylesheet">
     <link href="./css/fa/styles/brands.min.css" rel="stylesheet">
     <link href="./css/index.css" rel="stylesheet">
-    <script src="./js/toolkit/Evnt.js"></script>
-    <script src="./js/toolkit/Elem.js"></script>
-    <script src="./js/Tischtennis.js"></script>
+    <script src="./js/toolkit/Evnt.js?1"></script>
+    <script src="./js/toolkit/Elem.js?1"></script>
+    <script src="./js/Tischtennis.js?1"></script>
 </head>
 <body>
     <div id="main" data-serving="player1" data-enforced="none" data-finished="false">
@@ -41,6 +41,11 @@
         </div>
         <div id="commercial-sector">
             SPACEBOY SPORT SERVICE
+        </div>
+
+        <div id="btn-fullscreen" class="button" data-fullscreen="none">
+            <i class="fas fa-expand"></i>
+            <i class="fas fa-compress"></i>
         </div>
 
         <div id="btn-undo" class="button" data-visible="false">

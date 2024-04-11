@@ -95,12 +95,25 @@ class Tischtennis {
         }
     }
 
-    static enforceSetup () {
-
+    // Toggles fullscreen mode.
+    toggleFullscreen () {
+        switch (Elem.from("#main #btn-fullscreen").attr("data-fullscreen")) {
+            case "true":
+                Elem.exitFullscreen();
+                break;
+            case "false":
+                Elem.from("#main").requestFullscreen();
+                break;
+            default:
+        }
     }
 
-    static enforcePlay () {
-
+    // Event handler after fullscreen mode change.
+    static onFullscreenChange (e) {
+        Elem.from("#main #btn-fullscreen").attr(
+            "data-fullscreen",
+            (Elem.isFullscreenActive() ? "true" : "false")
+        );
     }
 
     // Nastaví viditelnost tlačítka "Undo".
