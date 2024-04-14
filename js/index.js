@@ -2,14 +2,12 @@
 const tischtennis = new Tischtennis();
 
 Evnt
-    // Po kliknuti na libovolny ukazatel skore nastava zmena:
     .onAll(
-        "#main #scoreboard-set .score-current .score", "click", (e) => {
-            tischtennis.markPoint(e.target);
-        }
+        // Po kliknuti na libovolny ukazatel skore nastava zmena:
+        "#main #scoreboard-set .score-current .score", "click", (e) => tischtennis.markPoint(e.target)
     )
-    // Po kliknuti na palku resime zmenu skore
     .on(
+        // Po kliknuti na palku resime zmenu podavani
         "#main #scoreboard-set .serving", "click", () => tischtennis.changeServing()
     )
     .on(

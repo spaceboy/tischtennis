@@ -46,18 +46,14 @@ class Tischtennis {
             this.#servingChange();
         }
 
-        // Pokud není konec setu, nic dalšího už neřešíme:
-        if (points < 11) {
+        // Zjistíme, zda je konec setu:
+        if (points >= 11 && Tischtennis.#pointsDifference(points, oponentPoints) >= 2) {
+            this.#finishSet();
             return;
         }
 
-        // Zjistíme rozdíl, pokud je menší než 2, nic dalšího už neřešíme:
-        if (Tischtennis.#pointsDifference(points, oponentPoints) < 2) {
-            return;
-        }
-
-        // Set byl dohrán:
-        this.#finishSet();
+        // Zjistíme, zda další míček bude setball či gameball:
+        this.checkSetballGameball(points, oponentPoints);
     }
 
     // Změna podání.
@@ -72,6 +68,35 @@ class Tischtennis {
 
         this.#writeToHistory();
         this.#servingChange();
+    }
+
+    // Kontroluje, zda se jedná o setball/matchball.
+    checkSetballGameball (points, oponentPoints)
+    {
+        switch (this.verbosity) {
+            case "quiet":
+            case "v":
+                // Nízká verbosita, nic neříkáme:
+                return;
+        }
+
+        if (points < 10 && oponentPoints < 10) {
+            // Nikdo nemá 10 bodů, setball to není:
+            return;
+        }
+        if (Tischtennis.#pointsDifference(points, oponentPoints) === 0) {
+            // Je shoda, setball to není:
+            return;
+        }
+
+        if (
+            (this.game.player1.sets === 2 && this.game.player1.points > this.game.player2.points)
+            || (this.game.player2.sets === 2 && this.game.player2.points > this.game.player1.points)
+        ) {
+            document.getElementById("audio-matchball").play();
+            return;
+        }
+        document.getElementById("audio-setball").play();
     }
 
     // Provede akci "undo".
@@ -100,13 +125,18 @@ class Tischtennis {
     // Prepina verbositu.
     toggleVerbosity () {
         switch (this.verbosity) {
-            case "v":
+            case "vvv":
                 this.verbosity = "quiet";
+                break;
+            case "vv":
+                this.verbosity = "quiet";
+                break;
+            case "v":
+                this.verbosity = "vv";
                 break;
             case "quiet":
                 this.verbosity = "v";
                 break;
-            // TODO: add "vv" and "vvv" modes
             default:
                 this.verbosity = "v";
         }
@@ -133,6 +163,14 @@ class Tischtennis {
         };
 
         this.#showScore(this.game);
+
+        switch (this.verbosity) {
+            case "v":
+            case "vv":
+            case "vvv":
+                document.getElementById("audio-start").play();
+                break;
+        }
     }
 
     // Event handler after fullscreen mode change.
@@ -182,6 +220,8 @@ class Tischtennis {
     #finishSet () {
         switch(this.verbosity) {
             case "v":
+            case "vv":
+            case "vvv":
                 document.getElementById("audio-applause").play();
                 break;
         }
