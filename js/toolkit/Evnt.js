@@ -15,7 +15,7 @@ class Evnt {
     // Add event(s) listener to ONE element.
     static on (el, event, listener) {
         // Determine element
-        if (!(el instanceof HTMLElement)) {
+        if (!(el instanceof HTMLElement) && (el !== document)) {
             el = (
                 el instanceof Elem
                 ? el.get()

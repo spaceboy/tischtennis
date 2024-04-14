@@ -58,8 +58,8 @@ class Tischtennis {
         this.#finishSet();
     }
 
-    // Změna podání (na požádání).
-    servingChange () {
+    // Změna podání.
+    changeServing () {
         // Vynutit změnu podání kliknutím je možné jen na začátku setu.
         if (
             this.#getPointsByPlayerId("player1") !== 0
@@ -95,8 +95,16 @@ class Tischtennis {
         }
     }
 
-    // Toggles fullscreen mode.
-    toggleFullscreen () {
+    // Event handler after fullscreen mode change.
+    static onFullscreenChange () {
+        Elem.from("#main #btn-fullscreen").attr(
+            "data-fullscreen",
+            (Elem.isFullscreenActive() ? "true" : "false")
+        );
+    }
+
+    // Event handler kliknutí ta tlačítko "toggle fullscreen".
+    onToggleFullscreenClick () {
         switch (Elem.from("#main #btn-fullscreen").attr("data-fullscreen")) {
             case "true":
                 Elem.exitFullscreen();
@@ -106,14 +114,6 @@ class Tischtennis {
                 break;
             default:
         }
-    }
-
-    // Event handler after fullscreen mode change.
-    static onFullscreenChange (e) {
-        Elem.from("#main #btn-fullscreen").attr(
-            "data-fullscreen",
-            (Elem.isFullscreenActive() ? "true" : "false")
-        );
     }
 
     // Nastaví viditelnost tlačítka "Undo".
