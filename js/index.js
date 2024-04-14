@@ -1,5 +1,5 @@
 // Inicializujeme vykonnou tridu
-let tischtennis = new Tischtennis();
+const tischtennis = new Tischtennis();
 
 Evnt
     // Po kliknuti na libovolny ukazatel skore nastava zmena:
@@ -14,6 +14,12 @@ Evnt
     )
     .on(
         "#btn-undo", "click", () => tischtennis.undoLastChange()
+    )
+    .on(
+        "#setup #verbosity .button", "click", () => tischtennis.toggleVerbosity()
+    )
+    .on(
+        "#setup #reset .button", "click", () => tischtennis.resetGame()
     );
 
 if (Elem.isFullscreenEnabled()) {
@@ -26,6 +32,6 @@ if (Elem.isFullscreenEnabled()) {
             "mozfullscreenchange": Tischtennis.onFullscreenChange
         }
     )
-    Evnt.on("#btn-fullscreen", "click", tischtennis.onToggleFullscreenClick);
+    Evnt.on("#btn-fullscreen", "click", Tischtennis.onToggleFullscreenClick);
     Elem.from("#btn-fullscreen").attr("data-fullscreen", "false");
 }

@@ -9,9 +9,9 @@
     <link href="./css/fa/styles/solid.min.css" rel="stylesheet">
     <link href="./css/fa/styles/brands.min.css" rel="stylesheet">
     <link href="./css/index.css" rel="stylesheet">
-    <script src="./js/toolkit/Evnt.js?1"></script>
-    <script src="./js/toolkit/Elem.js?1"></script>
-    <script src="./js/Tischtennis.js?1"></script>
+    <script src="./js/toolkit/Evnt.js?2"></script>
+    <script src="./js/toolkit/Elem.js?2"></script>
+    <script src="./js/Tischtennis.js?2"></script>
 </head>
 <body>
     <div id="main" data-serving="player1" data-enforced="none" data-finished="false">
@@ -51,26 +51,86 @@
         <div id="btn-undo" class="button" data-visible="false">
             <i class="fas fa-undo-alt"></i>
         </div>
-
-        <!--
-        <div id="btn-setup" class="button">
-            <i class="fas fa-cog"></i>
-        </div>
-        -->
     </div>
 
     <div id="setup" class="setup">
         <h1 data-shadow="SETTINGS">NASTAVENÍ</h1>
 
-        <h2 class="player1 name">PLAYER 1</h2>
-
-        <h2 class="player2 name">PLAYER 2</h2>
+        <div class="row">
+            <div class="button">
+                <i class="fas fa-user-friends"></i>
+            </div>
+            <div class="col">
+                <h2 class="player1">
+                    <span class="name">PLAYER 1</span>
+                    <!--
+                    <select>
+                        <option value="PLAYER 1">PLAYER 1</option>
+                    </select>
+                    -->
+                </h2>
+                <h2 class="player1">
+                    <span class="name">PLAYER 2</span>
+                    <!--
+                    <select>
+                        <option value="PLAYER 2">PLAYER 2</option>
+                    </select>
+                    -->
+                </h2>
+            </div>
+        </div>
 
         <!--
-        <div id="btn-play" class="button">
-            <i class="fas fa-table-tennis"></i>
+        TODO Prvek pro přidávání / odebírání jmen a jejich ukládání do cookie.
+        <div class="row">
+            <div class="button"></div>
+            <div class="col"></div>
         </div>
         -->
+
+        <!--
+        mute: žádné zvuky
+        normal: zvuk na konci setu
+        loud: zvuk po každém míčku, oznamování setballu & matchballu
+        -->
+        <div class="row" id="verbosity" data-verbosity="v">
+            <div class="button">
+                <i data-level="quiet" class="fas fa-volume-mute"></i>
+                <i data-level="v" class="fas fa-volume-off"></i>
+                <i data-level="vv" class="fas fa-volume-down"></i>
+                <i data-level="vvv" class="fas fa-volume-up"></i>
+            </div>
+            <div class="col">
+                <h3>Hlasová oznámení</h3>
+                <p data-level="quiet">Zcela potichu</p>
+                <p data-level="v">Konec setu</p>
+                <p data-level="vv">Konec setu, setball</p>
+                <p data-level="vvv">Každý míček, setball</p>
+            </div>
+        </div>
+
+        <div class="row" id="reset" data-verbosity="v">
+            <div class="button">
+                <i class="fas fa-power-off"></i>
+            </div>
+            <div class="col">
+                <h3>Ukončit hru</h3>
+                <p>Resetuje hru</p>
+            </div>
+        </div>
+
+        <div class="row" id="to-scoreboard">
+            <div class="button">
+                <i class="fas fa-sync-alt"></i>
+            </div>
+            <div class="col">
+                <h3>Na tabuli skóre</h3>
+                <p>
+                    Pokud chcete přejít na tabuli skóre, otočte mobilní zařízení do polohy "landscape".<br>
+                    (Poloha zařízení nesmí být uzamčena.)
+                </p>
+            </div>
+        </div>
     </div>
 
     <audio id="audio-applause" preload="auto">

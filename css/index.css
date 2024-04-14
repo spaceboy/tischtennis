@@ -26,6 +26,10 @@ html, body {
     position: absolute;
 }
 
+h1, h2, h3 {
+    text-transform: uppercase;
+}
+
 #main {
     background-color: green;
     display: flex;
@@ -250,35 +254,66 @@ html, body {
 
 
 #setup {
+    border: none;
+    font-size: 3vh;
     color: darkgreen;
     min-height: 100%;
     width: 100%;
     padding: 1vw 2vh;
     margin: 0;
-    border: none;
-
 }
 
 #setup h1 {
-    font-family: "Slavia", sans-serif;
     font-size: 12vw;
-    margin: .25em 0 0 0;
+    margin: .25em 0 .5em 0;
 }
 
-#setup .button {
-    color: darkgreen;
-    font-size: 12vw;
-    font-weight: 900;
-    position: absolute;
+#setup .row {
+    margin: 0 0 1em 0;
+    padding: 0;
 }
 
-#setup #btn-play {
+#setup .row .button {
+    font-size: 12vw;
+    display: inline-block;
+    width: 12vh;
+    padding: 0;
+    text-align: center;
+}
+
+#setup .row .col {
+    display: inline-block;
+    padding: 0;
+    vertical-align: top;
+    width: calc(100% - 13vh);
+}
+
+#setup .row .col p,
+#setup .row .col h2,
+#setup .row .col h3 {
+    padding: 0;
+    margin: 0 0 .25em 0;
+}
+
+#setup #verbosity *[data-level] {
+    display: none;
+}
+
+#setup #verbosity[data-verbosity="quiet"] *[data-level="quiet"] {
     display: block;
-    position: fixed;
-    top: .2em;
-    right: 1em;
 }
 
+#setup #verbosity[data-verbosity="v"] *[data-level="v"] {
+    display: block;
+}
+
+#setup #verbosity[data-verbosity="vv"] *[data-level="vv"] {
+    display: block;
+}
+
+#setup #verbosity[data-verbosity="vvv"] *[data-level="vvv"] {
+    display: block;
+}
 
 
 *[data-shadow] {

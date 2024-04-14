@@ -16,6 +16,8 @@ class Tischtennis {
         "history": []
     }
 
+    verbosity = "v";
+
     // Konstruktor tridy.
     constructor () {
         screen.orientation.unlock();
@@ -95,6 +97,44 @@ class Tischtennis {
         }
     }
 
+    // Prepina verbositu.
+    toggleVerbosity () {
+        switch (this.verbosity) {
+            case "v":
+                this.verbosity = "quiet";
+                break;
+            case "quiet":
+                this.verbosity = "v";
+                break;
+            // TODO: add "vv" and "vvv" modes
+            default:
+                this.verbosity = "v";
+        }
+
+        Elem.from("#verbosity").attr("data-verbosity", this.verbosity);
+    }
+
+    // Resetuje hru.
+    resetGame () {
+        this.game = {
+            "player1": {
+                "name": "PLAYER 1",
+                "points": 0,
+                "sets": 0
+            },
+            "player2": {
+                "name": "PLAYER 2",
+                "points": 0,
+                "sets": 0
+            },
+            "serving": "player1",
+            "sets": [],
+            "history": []
+        };
+
+        this.#showScore(this.game);
+    }
+
     // Event handler after fullscreen mode change.
     static onFullscreenChange () {
         Elem.from("#main #btn-fullscreen").attr(
@@ -104,7 +144,7 @@ class Tischtennis {
     }
 
     // Event handler kliknutí ta tlačítko "toggle fullscreen".
-    onToggleFullscreenClick () {
+    static onToggleFullscreenClick () {
         switch (Elem.from("#main #btn-fullscreen").attr("data-fullscreen")) {
             case "true":
                 Elem.exitFullscreen();
@@ -140,7 +180,11 @@ class Tischtennis {
 
     // Ukončení setu.
     #finishSet () {
-        document.getElementById("audio-applause").play();
+        switch(this.verbosity) {
+            case "v":
+                document.getElementById("audio-applause").play();
+                break;
+        }
 
         let scorePlayer1 = this.#getPointsByPlayerId("player1");
         let scorePlayer2 = this.#getPointsByPlayerId("player2");
