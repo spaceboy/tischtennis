@@ -14,6 +14,9 @@ Evnt
         "#btn-undo", "click", () => tischtennis.undoLastChange()
     )
     .on(
+        "#setup #switch-sides .button", "click", () => tischtennis.toggleSwitchSides()
+    )
+    .on(
         "#setup #verbosity .button", "click", () => tischtennis.toggleVerbosity()
     )
     .on(

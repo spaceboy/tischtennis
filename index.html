@@ -14,7 +14,7 @@
     <script src="./js/Tischtennis.js?2"></script>
 </head>
 <body>
-    <div id="main" data-serving="player1" data-enforced="none" data-finished="false">
+    <div id="main" data-switch-sides="" data-serving="player1" data-enforced="none" data-finished="false">
         <div id="scoreboard-game">
             <div class="wrapper">
                 <div class="player player1">
@@ -56,43 +56,17 @@
     <div id="setup" class="setup">
         <h1 data-shadow="SETTINGS">NASTAVENÍ</h1>
 
-        <div class="row">
+        <div class="row" id="switch-sides" data-switch-sides="no">
             <div class="button">
-                <i class="fas fa-user-friends"></i>
+                <i class="fas fa-people-arrows"></i>
             </div>
             <div class="col">
-                <h2 class="player1">
-                    <span class="name">PLAYER 1</span>
-                    <!--
-                    <select>
-                        <option value="PLAYER 1">PLAYER 1</option>
-                    </select>
-                    -->
-                </h2>
-                <h2 class="player1">
-                    <span class="name">PLAYER 2</span>
-                    <!--
-                    <select>
-                        <option value="PLAYER 2">PLAYER 2</option>
-                    </select>
-                    -->
-                </h2>
+                <h3>Měnit strany</h3>
+                <p data-switch-sides="no">Neměnit strany</p>
+                <p data-switch-sides="yes">Po setu měnit strany</p>
             </div>
         </div>
 
-        <!--
-        TODO Prvek pro přidávání / odebírání jmen a jejich ukládání do cookie.
-        <div class="row">
-            <div class="button"></div>
-            <div class="col"></div>
-        </div>
-        -->
-
-        <!--
-        mute: žádné zvuky
-        normal: zvuk na konci setu
-        loud: zvuk po každém míčku, oznamování setballu & matchballu
-        -->
         <div class="row" id="verbosity" data-verbosity="v">
             <div class="button">
                 <i data-level="quiet" class="fas fa-volume-mute"></i>

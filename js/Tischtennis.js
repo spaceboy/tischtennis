@@ -16,6 +16,10 @@ class Tischtennis {
         "history": []
     }
 
+    // Vymena stran po setu.
+    switchSides = false;
+
+    // Nastavení verbosity.
     verbosity = "v";
 
     // Konstruktor tridy.
@@ -120,6 +124,12 @@ class Tischtennis {
         if (!this.game.history.length) {
             this.#setButtonUndoVisibility(false);
         }
+    }
+
+    // Nastaveni prehazovani stran po setu.
+    toggleSwitchSides () {
+        this.switchSides = !this.switchSides;
+        Elem.from("#switch-sides").attr("data-switch-sides", (this.switchSides ? "yes" : "no"));
     }
 
     // Prepina verbositu.
@@ -238,6 +248,14 @@ class Tischtennis {
 
         if (this.game[setWinner].sets === 3) {
             this.#finishGame();
+        } else {
+            if (this.switchSides) {
+                let elemMain = Elem.from("#main");
+                elemMain.attr(
+                    "data-switch-sides",
+                    (elemMain.attr("data-switch-sides") === "switched" ? "" : "switched")
+                );
+            }
         }
     }
 
