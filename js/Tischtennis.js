@@ -379,7 +379,6 @@ class Tischtennis {
                 .get()
         );
         Elem.from(el).html(this.game.player1.sets > this.game.player2.sets ? this.game.player1.name : this.game.player2.name);
-        console.log(el);
 
         // Doplnění jednotlivých setů:
         for (let s of this.game.sets) {
