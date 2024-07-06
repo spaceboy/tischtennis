@@ -369,8 +369,20 @@ class Tischtennis {
         // Zobrazení výsledku zápasu:
         Elem.from("#main").attr("data-finished", "true");
         let target = Elem.from("#scoreboard-match .wrapper").html("").get();
-        target.appendChild(Elem.from("#template-final-header").clone(true).attrRemove("id").get());
-        for(let s of this.game.sets) {
+
+        // Zkopírování hlavičky a vložení jména vítěze:
+        let el = target.appendChild(
+            Elem
+                .from("#template-final-header")
+                .clone(true)
+                .attrRemove("id")
+                .get()
+        );
+        Elem.from(el).html(this.game.player1.sets > this.game.player2.sets ? this.game.player1.name : this.game.player2.name);
+        console.log(el);
+
+        // Doplnění jednotlivých setů:
+        for (let s of this.game.sets) {
             let row = Elem.from("#template-final-row").clone(true).attrRemove("id").get();
             Elem.from(row, ".player1").html(s[0]);
             Elem.from(row, ".player2").html(s[1]);

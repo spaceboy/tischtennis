@@ -168,7 +168,7 @@ h1, h2, h3 {
 #main #scoreboard-match {
     display: none;
     position: fixed;
-    top: 10vw;
+    bottom: 10vh;
     text-align: center;
     width: 100%;
     z-index: 100;
@@ -182,21 +182,25 @@ h1, h2, h3 {
     background: ghostwhite;
     border: 5px solid black;
     border-radius: 1vw;
-    font-size: 4vw;
     display: inline-block;
+    font-size: 7vh;
+    height: max-content;
     margin: auto;
+    min-width: 33%;
+    overflow: scroll;
     padding: 1vh 5vw 2vh 5vw;
 }
 
 #main #scoreboard-match .wrapper h2 {
     color: darkgreen;
+    font-size: 9vh;
     margin: .25em 0;
 }
 
 #main #scoreboard-match .wrapper .row {
     display: flex;
     flex-direction: row;
-    margin-bottom: .5em;
+    margin-bottom: .35em;
 }
 
 #main #scoreboard-match .wrapper .row div {
