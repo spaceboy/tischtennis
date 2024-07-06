@@ -191,7 +191,7 @@ class Tischtennis {
             "history": []
         };
 
-        this.#showScore(this.game);
+        Elem.from("#main").attr("data-finished", "false");
 
         switch (this.verbosity) {
             case "v":
