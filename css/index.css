@@ -358,6 +358,17 @@ h1, h2, h3 {
     display: block;
 }
 
+#setup #save *[data-save] {
+    display: none;
+}
+
+#setup #save[data-save="yes"] *[data-save="yes"] {
+    display: block;
+}
+
+#setup #save[data-save="no"] *[data-save="no"] {
+    display: block;
+}
 
 *[data-shadow] {
     position: relative;

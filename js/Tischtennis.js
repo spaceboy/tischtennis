@@ -22,6 +22,12 @@ class Tischtennis {
     // Nastavení verbosity.
     verbosity = "v";
 
+    // Nastavení ukládání.
+    saveSettings = false;
+
+    // Historie zapasu.
+    gameHistory = [];
+
     // Konstruktor tridy.
     constructor () {
         screen.orientation.unlock();
@@ -126,13 +132,20 @@ class Tischtennis {
         }
     }
 
-    // Nastaveni prehazovani stran po setu.
+    // Nastavení přehazování stran po setu.
     toggleSwitchSides () {
         this.switchSides = !this.switchSides;
+
+        this.showSwitchSides();
+        this.settingsSave();
+    }
+
+    // Zobrazí nastavení přehazování stran po setu.
+    showSwitchSides () {
         Elem.from("#switch-sides").attr("data-switch-sides", (this.switchSides ? "yes" : "no"));
     }
 
-    // Prepina verbositu.
+    // Přepíná verbositu.
     toggleVerbosity () {
         switch (this.verbosity) {
             case "vvv":
@@ -151,6 +164,12 @@ class Tischtennis {
                 this.verbosity = "v";
         }
 
+        this.showVerbosity();
+        this.settingsSave();
+    }
+
+    // Zobrazí nastavení verbosity.
+    showVerbosity () {
         Elem.from("#verbosity").attr("data-verbosity", this.verbosity);
     }
 
@@ -180,6 +199,92 @@ class Tischtennis {
             case "vvv":
                 document.getElementById("audio-start").play();
                 break;
+        }
+    }
+
+    // Přepíná ukládání do cookies.
+    toggleSave () {
+        this.saveSettings = !this.saveSettings
+
+        this.showSettingsSave();
+
+        if (this.saveSettings) {
+            this.settingsSave();
+        } else {
+            this.settingsClear();
+        }
+    }
+
+    // Zobrazuje stav ukládání do cookies.
+    showSettingsSave () {
+        Elem.from("#save").attr("data-save", this.saveSettings ? "yes" : "no");
+    }
+
+    // Načte nastavení z cookie.
+    settingsLoad () {
+        for (let pair of document.cookie.split(";")) {
+            let [key, val] = pair.split("=");
+            switch (key.trim()) {
+                case "verbosity":
+                    if (val !== "") {
+                        this.verbosity = val;
+                        this.showVerbosity();
+                    }
+                    break;
+                case "switchSides":
+                    if (val !== "") {
+                        this.switchSides = (val === "yes");
+                        this.showSwitchSides();
+                    }
+                    break;
+                case "saveSettings":
+                    if (val !== "") {
+                        this.saveSettings = (val === "yes");
+                        this.showSettingsSave();
+                    }
+                    break;
+            }
+        }
+    }
+
+    // Uloží nastavení do cookie.
+    settingsSave () {
+        if (!this.saveSettings) {
+            return;
+        }
+
+        let expires = new Date();
+        expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000);
+
+        Tischtennis.cookiesSave(
+            {
+                "verbosity": this.verbosity,
+                "switchSides": (this.switchSides ? "yes" : "no"),
+                "saveSettings": (this.saveSettings ? "yes" : "no")
+            },
+            expires.toUTCString()
+        );
+    }
+
+    // Vymaže nastavení v cookie.
+    settingsClear () {
+        Tischtennis.cookiesSave(
+            {
+                "verbosity": "",
+                "switchSides": "",
+                "saveSettings": ""
+            },
+            "Thu, 01 Jan 1970 00:00:00 UTC"
+        );
+    }
+
+    // Uloží hodnoty do cookie.
+    static cookiesSave (values, expires) {
+        for (let i in values) {
+            let cookie = [i + "=" + values[i]];
+            cookie.push("expires=" + expires);
+            cookie.push("path=/");
+            document.cookie = cookie.join(";");
         }
     }
 

@@ -1,6 +1,7 @@
 // Inicializujeme vykonnou tridu
 const tischtennis = new Tischtennis();
 
+tischtennis.settingsLoad();
 Evnt
     .onAll(
         // Po kliknuti na libovolny ukazatel skore nastava zmena:
@@ -21,6 +22,9 @@ Evnt
     )
     .on(
         "#setup #reset .button", "click", () => tischtennis.resetGame()
+    )
+    .on(
+        "#setup #save .button", "click", () => tischtennis.toggleSave()
     );
 
 if (Elem.isFullscreenEnabled()) {
